@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="userMap">
+
+	<resultMap id="userResultMap" class="com.trucktrack.core.module.user.model.User">
+		<result property="id" column="id" jdbcType="VARCHAR" />
+		<result property="refCustomerId" column="ref_customer_id" jdbcType="VARCHAR" />
+		<result property="firstName" column="first_name" jdbcType="VARCHAR" />
+		<result property="lastName" column="last_name" jdbcType="VARCHAR" />
+		<result property="username" column="username" jdbcType="VARCHAR" />
+		<result property="password" column="password" jdbcType="VARCHAR" />
+		<result property="termsAccepted" column="terms_accepted" jdbcType="BOOLEAN" />
+		<result property="deadline" column="deadline" jdbcType="TIMESTAMP" />
+		<result property="access" column="access" jdbcType="INTEGER" />
+	</resultMap>
+
+	<select id="getUserByUsername" resultMap="userResultMap">
+		SELECT u.id, u.ref_customer_id, u.first_name, u.last_name, u.username, u.password, u.terms_accepted, u.deadline, u.access
+		FROM tt_user u
+		WHERE u.username = #username#
+	</select>
+	
+	<select id="getUsers" resultMap="userResultMap">
+	<![CDATA[
+		SELECT u.id, u.ref_customer_id, u.first_name, u.last_name, u.username, u.password, u.terms_accepted, u.deadline, u.access
+		FROM tt_user u
+ 		WHERE $criteria$
+	]]>
+	</select>
+
+	<insert id="addUser">
+		INSERT INTO tt_user VALUES 
+		(#id#, #refCustomerId#, #firstName#, #lastName#, #username#, #password#, #termsAccepted#, #deadline#, #access#)
+	</insert>
+	
+	<update id="updateUser">
+		UPDATE tt_user
+		SET username = #username#,
+			password = #password#,
+			terms_accepted = #termsAccepted#
+		WHERE id = #id#
+	</update>
+	
+	<update id="acceptTerms">
+		UPDATE tt_user
+		SET terms_accepted = 1
+		WHERE username = #username#
+	</update>
+	
+	<delete id="deleteUser">
+		DELETE FROM tt_user
+		WHERE id = #id#
+	</delete>
+	
+</sqlMap>

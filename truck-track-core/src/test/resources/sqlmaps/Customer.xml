@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="customerMap">
+
+	<resultMap id="customerResultMap" class="com.trucktrack.core.test.module.customer.model.Customer">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="address" column="address" />
+		<result property="postcode" column="postcode" />
+	</resultMap>
+
+	<select id="getCustomers" resultMap="customerResultMap">
+		SELECT c.id, c.name, c.address, c.postcode
+		FROM tt_customer c
+	</select>
+
+	<select id="getCustomerById" resultMap="customerResultMap">
+		SELECT c.id, c.name, c.address, c.postcode
+		FROM tt_customer c
+		WHERE c.id = #id#
+	</select>
+
+	<insert id="insertCustomer">
+		INSERT INTO tt_customer (name, address, postcode) VALUES 
+		(#id#, #name#, #address#, #postcode#)
+	</insert>
+
+	<update id="updateCustomer">
+		UPDATE tt_customer
+		SET name = #name#, 
+			address = #address#, 
+			postcode = #postcode#
+		WHERE id = #id#
+	</update>
+
+	<delete id="deleteCustomer">
+		DELETE FROM tt_customer 
+		WHERE id = #id#
+	</delete>
+	
+</sqlMap>

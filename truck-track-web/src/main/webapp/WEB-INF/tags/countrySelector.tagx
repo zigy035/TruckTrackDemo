@@ -1,0 +1,112 @@
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+	xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:form="http://www.springframework.org/tags/form" 
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" 
+	xmlns:jsp="http://java.sun.com/JSP/Page" 
+	version="2.0">
+	
+	<jsp:directive.tag import="java.util.ArrayList" />
+  	<jsp:output omit-xml-declaration="yes" />
+
+	<jsp:directive.attribute 
+		name="id" 
+		type="java.lang.String" 
+		required="true" rtexprvalue="true" 
+		description="Attribute Identifier" />
+
+	<jsp:directive.attribute 
+		name="name" 
+		type="java.lang.String" 
+		required="true" rtexprvalue="true" 
+		description="Attribute name" />
+
+	<jsp:directive.attribute 
+		name="countryCodes" 
+		type="java.util.List"
+		required="true" rtexprvalue="true" 
+		description="Country Codes" />
+		
+	<jsp:directive.attribute 
+		name="selectedCode" 
+		type="java.lang.String"
+		required="true" rtexprvalue="true" 
+		description="Selected Code" />
+
+	<select id="id" name="${name}">
+		<option value=""><spring:message code="please.select.country" /></option>
+		<!-- 
+		<c:forEach items="${countryCodes}" var="countryCode">
+			<option value="${countryCode}" ${countryCode == name ? 'selected="selected"' : ''}>
+				<spring:message code="country.name.${fn:toLowerCase(countryCode)}" />
+			</option>
+		</c:forEach>
+		 -->
+		<c:forEach items="${countryCodes}" var="countryCode">
+			<c:if test="${countryCode == selectedCode}">
+				<option value="${countryCode}" selected="selected">
+					<spring:message code="country.name.${fn:toLowerCase(countryCode)}" />
+				</option>	
+			</c:if>
+			<c:if test="${countryCode != selectedCode}">
+				<option value="${countryCode}">
+					<spring:message code="country.name.${fn:toLowerCase(countryCode)}" />
+				</option>
+			</c:if>
+		</c:forEach>
+		
+		<!-- 
+		<option value=""><spring:message code="please.select.country" /></option>
+		<option value="AL"><spring:message code="country.name.al" /></option>
+		<option value="AN"><spring:message code="country.name.an" /></option>
+		<option value="AM"><spring:message code="country.name.am" /></option>
+		<option value="AT"><spring:message code="country.name.at" /></option>
+		<option value="AZ"><spring:message code="country.name.az" /></option>
+		<option value="BA"><spring:message code="country.name.ba" /></option>
+		<option value="BE"><spring:message code="country.name.be" /></option>
+		<option value="BG"><spring:message code="country.name.bg" /></option>
+		<option value="BY"><spring:message code="country.name.by" /></option>
+		<option value="CH"><spring:message code="country.name.ch" /></option>
+		<option value="CY"><spring:message code="country.name.cy" /></option>
+		<option value="CZ"><spring:message code="country.name.cz" /></option>
+		<option value="DE"><spring:message code="country.name.de" /></option>
+		<option value="DK"><spring:message code="country.name.dk" /></option>
+		<option value="EE"><spring:message code="country.name.ee" /></option>
+		<option value="ES"><spring:message code="country.name.es" /></option>
+		<option value="FI"><spring:message code="country.name.fi" /></option>
+		<option value="FR"><spring:message code="country.name.fr" /></option>
+		<option value="GB"><spring:message code="country.name.gb" /></option>
+		<option value="GE"><spring:message code="country.name.ge" /></option>
+		<option value="GR"><spring:message code="country.name.gr" /></option>
+		<option value="HR"><spring:message code="country.name.hr" /></option>
+		<option value="HU"><spring:message code="country.name.hu" /></option>
+		<option value="IE"><spring:message code="country.name.ie" /></option>
+		<option value="IS"><spring:message code="country.name.is" /></option>
+		<option value="IT"><spring:message code="country.name.it" /></option>
+		<option value="KZ"><spring:message code="country.name.kz" /></option>
+		<option value="LI"><spring:message code="country.name.li" /></option>
+		<option value="LT"><spring:message code="country.name.lt" /></option>
+		<option value="LU"><spring:message code="country.name.lu" /></option>
+		<option value="LV"><spring:message code="country.name.lv" /></option>
+		<option value="MC"><spring:message code="country.name.mc" /></option>
+		<option value="MD"><spring:message code="country.name.md" /></option>
+		<option value="ME"><spring:message code="country.name.me" /></option>
+		<option value="MK"><spring:message code="country.name.mk" /></option>
+		<option value="MT"><spring:message code="country.name.mt" /></option>
+		<option value="NL"><spring:message code="country.name.nl" /></option>
+		<option value="NO"><spring:message code="country.name.no" /></option>
+		<option value="PL"><spring:message code="country.name.pl" /></option>
+		<option value="PT"><spring:message code="country.name.pt" /></option>
+		<option value="RO"><spring:message code="country.name.ro" /></option>
+		<option value="RS"><spring:message code="country.name.rs" /></option>
+		<option value="RU"><spring:message code="country.name.ru" /></option>
+		<option value="SE"><spring:message code="country.name.se" /></option>
+		<option value="SI"><spring:message code="country.name.si" /></option>
+		<option value="SK"><spring:message code="country.name.sk" /></option>
+		<option value="TR"><spring:message code="country.name.tr" /></option>
+		<option value="UA"><spring:message code="country.name.ua" /></option>
+		 -->
+	</select>
+
+</jsp:root>

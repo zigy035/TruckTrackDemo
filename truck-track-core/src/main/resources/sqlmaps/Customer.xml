@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="customerMap">
+
+	<resultMap id="customerResultMap" class="com.trucktrack.core.module.customer.model.Customer">
+		<result property="id" column="id" jdbcType="VARCHAR" />
+		<result property="name" column="name" jdbcType="VARCHAR" />
+		<result property="contactPerson" column="contact_person" jdbcType="VARCHAR" />
+		<result property="refCountryCode" column="ref_country_code" jdbcType="VARCHAR" />
+		<result property="address" column="address" jdbcType="VARCHAR" />
+		<result property="city" column="city" jdbcType="VARCHAR" />
+		<result property="postcode" column="postcode" jdbcType="VARCHAR" />
+		<result property="telephone" column="telephone" jdbcType="VARCHAR" />
+		<result property="email" column="email" jdbcType="VARCHAR" />
+		<result property="memo" column="memo" jdbcType="TEXT" />
+		<result property="status" column="status" jdbcType="INTEGER" />
+	</resultMap>
+
+	<select id="getCustomers" resultMap="customerResultMap">
+	<![CDATA[
+		SELECT c.id, c.name, c.contact_person, c.ref_country_code, c.address, c.city, c.postcode, c.telephone, c.email, c.memo, c.status
+		FROM tt_customer c
+		WHERE $criteria$
+	]]>
+	</select>
+
+	<select id="getCustomerById" resultMap="customerResultMap">
+		SELECT c.id, c.name, c.contact_person, c.ref_country_code, c.address, c.city, c.postcode, c.telephone, c.email, c.memo, c.status
+		FROM tt_customer c
+		WHERE c.id = #id#
+	</select>
+
+	<select id="getCustomerByEmail" resultMap="customerResultMap">
+		SELECT c.id, c.name, c.contact_person, c.ref_country_code, c.address, c.city, c.postcode, c.telephone, c.email, c.memo, c.status
+		FROM tt_customer c
+		WHERE c.email = #email#
+	</select>
+
+	<insert id="addCustomer">
+		INSERT INTO tt_customer VALUES 
+		(#id#, #name#, #contactPerson#, #refCountryCode#, #address#, #city#, #postcode#, #telephone#, #email#, #memo#, #status#)
+	</insert>
+
+	<update id="updateCustomer">
+		UPDATE tt_customer
+		SET name = #name#, 
+			address = #address#, 
+			postcode = #postcode#
+		WHERE id = #id#
+	</update>
+
+	<delete id="deleteCustomer">
+		DELETE FROM tt_customer 
+		WHERE id = #id#
+	</delete>
+	
+</sqlMap>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+    <definition name="baseLayout" template="/WEB-INF/templates/layout.jsp">    
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/WEB-INF/templates/header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/templates/menu.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/templates/footer.jsp" />
+    </definition>
+
+	<definition name="registrationForm" extends="baseLayout">
+        <put-attribute name="title" value="Registration Form" />
+        <put-attribute name="body" value="/WEB-INF/views/register.jsp" />
+    </definition>
+
+	<definition name="confirmRegistration" extends="baseLayout">
+        <put-attribute name="title" value="Confirm Registration" />
+        <put-attribute name="body" value="/WEB-INF/views/confirm_registration.jsp" />
+    </definition>
+	
+ 	<definition name="authLogin" extends="baseLayout">
+        <put-attribute name="title" value="Login Page" />
+        <put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+    </definition>
+
+ 	<definition name="authTerms" extends="baseLayout">
+        <put-attribute name="title" value="Terms Page" />
+        <put-attribute name="body" value="/WEB-INF/views/terms.jsp" />
+    </definition>
+ 
+    <definition name="cargoList" extends="baseLayout">
+        <put-attribute name="title" value="Cargo List" />
+        <put-attribute name="body" value="/WEB-INF/views/cargo/cargo_list.jsp" />
+    </definition>
+    
+    <definition name="cargoForm" extends="baseLayout">
+        <put-attribute name="title" value="Cargo Form" />
+        <put-attribute name="body" value="/WEB-INF/views/cargo/cargo_form.jsp" />
+    </definition>
+    
+<!--     <definition name="customer/list" extends="baseLayout"> -->
+<!--         <put-attribute name="title" value="Customer List" /> -->
+<!--         <put-attribute name="body" value="/WEB-INF/views/customer/customer_list.jsp" /> -->
+<!--     </definition> -->
+    
+<!--     <definition name="customer/form" extends="baseLayout"> -->
+<!--         <put-attribute name="title" value="Customer Form" /> -->
+<!--         <put-attribute name="body" value="/WEB-INF/views/customer/customer_form.jsp" /> -->
+<!--     </definition> -->
+    
+<!--     <definition name="vehicle/list" extends="baseLayout"> -->
+<!--         <put-attribute name="title" value="Vehicle List" /> -->
+<!--         <put-attribute name="body" value="/WEB-INF/views/vehicle/vehicle_list.jsp" /> -->
+<!--     </definition> -->
+    
+<!--     <definition name="vehicle/form" extends="baseLayout"> -->
+<!--         <put-attribute name="title" value="Vehicle Form" /> -->
+<!--         <put-attribute name="body" value="/WEB-INF/views/vehicle/vehicle_form.jsp" /> -->
+<!--     </definition> -->
+ 
+</tiles-definitions>
