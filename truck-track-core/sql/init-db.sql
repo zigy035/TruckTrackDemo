@@ -1,3 +1,5 @@
+/* Dev branch */
+
 CREATE TABLE `tt_customer` (
   `id` varchar(36) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
