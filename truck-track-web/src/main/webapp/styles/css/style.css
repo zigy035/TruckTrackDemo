@@ -1,3 +1,35 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #F6CEF5;
+}
+
+#wrapper {
+	width: 950px;
+	margin: 0 auto;
+}
+
+#header {
+	background-color:#3e83c9; 
+}
+
+#sidebar {
+	background-color:#95bce2; 
+	width:200px;
+	float:left;
+}
+
+#main {
+	background-color:#eeeeee; 
+	width:750px;
+	float:right;
+}
+
+#footer {
+	background-color:#3e83c9;
+	clear:both;
+}
+
 table.container {
 	border-width: 1px;
 	border-spacing: 0px;
@@ -113,14 +145,6 @@ table.siteLayout td.header {
 	border-right: 1px solid #fff;
 	line-height: 1.2;
 	height: 100px;
-}
-
-.wrapper, .page_header, .page_footer {
-	position:relative;
-}
-
-.wrapper {
-	width: 1000px;
 }
 
 .page_header {
