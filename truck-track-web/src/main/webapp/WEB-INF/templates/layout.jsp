@@ -1,5 +1,5 @@
+<!doctype html>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<!DOCTYPE html>
 <html>
 	<head>
 		<title><tiles:insertAttribute name="title" /></title>

@@ -1,7 +1,19 @@
+@charset "utf-8";
+
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #F6CEF5;
+/* 	background-color: #F6CEF5; */
+/* 	font-family:Arial, Helvetica, sans-serif; */
+	font-family: Open Sans,sans-serif;
+}
+
+h3 {
+	font-size:14px;
+}
+
+p {
+	font-size:12px;
 }
 
 #wrapper {
@@ -10,12 +22,13 @@ body {
 }
 
 #header {
-	background-color:#3e83c9; 
+	background-color:#00CCFF; 
+	height: 100px;
 }
 
 #sidebar {
 	background-color:#95bce2; 
-	width:200px;
+	width:150px;
 	float:left;
 }
 
@@ -26,8 +39,82 @@ body {
 }
 
 #footer {
-	background-color:#3e83c9;
+	background-color:#00CCFF;
 	clear:both;
+}
+
+#logo {
+	float:left;
+	width: 200px;
+}
+    
+#nav {
+	margin-left:10px;
+	width: 750px;
+}
+
+#nav ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+	float:right;
+}
+
+#nav ul li {
+	float:left;
+	position:relative;
+	height: 80px;
+}
+
+#nav ul li a {
+	height:20px;
+	line-height:20px;
+	padding:0 5px;
+	display:block;
+	font-weight:bold;
+	list-style:outside none none;
+	color:blue;
+	text-decoration:none;
+	text-transform:uppercase;
+}
+
+.sidebar {
+	float:left;
+}
+
+.sidebar ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+	background-color:#C00;
+	width: 100%
+}
+
+.sidebar ul li {
+	position:relative;
+	padding: 5px;
+	border-bottom: 1px solid white;
+}
+
+.sidebar ul li a {
+	 color:#ffffff;
+	 text-decoration:none;
+	 text-transform:uppercase;
+}
+
+#nav ul a:hover {
+	background:rgba (255,255,255,0.2);
+} 
+
+#nav ul a:active {
+	background:rgba (255,255,255,0.4); 
+}
+
+#nav ul ul {
+	position:absolute;
+	top:80px;
+	left:0;
+	background:#F00;
 }
 
 table.container {
@@ -90,7 +177,7 @@ table.sample {
 table.sample th {
 	font: 12px Arial, Sand-Serif;
 	font-weight: bold; 
-	background: #3e83c9;
+	background: #00CCFF;
 	color: #fff;
 	padding: 2px 11px;
 	text-align: left;
@@ -138,7 +225,7 @@ table.siteLayout {
 table.siteLayout td.header {
 	font: 14px Arial, Sand-Serif;
 	font-weight: bold; 
-	background: #3e83c9;
+	background: #00CCFF;
 	color: #fff;
 	padding: 2px 11px;
 	text-align: left;
@@ -197,7 +284,7 @@ table.siteLayout td.header {
 #pagination li.active { background-color: #95BCE2; color: #fff; }
 #pagination li a { display: inline-block; padding: 5px 9px; margin: -5px -9px; text-decoration: none;}
 #pagination li a { color: #fff; }
-#pagination li a:hover { background: #3E83C9; }
+#pagination li a:hover { background: #00CCFF; }
 #pagination li,
 #pagination li a {
 	-moz-border-radius: 5px;
