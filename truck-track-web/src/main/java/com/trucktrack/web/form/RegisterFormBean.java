@@ -1,10 +1,7 @@
-package com.trucktrack.web.model;
+package com.trucktrack.web.form;
 
-import java.util.UUID;
-
-public class CustomerView
-{
-	private String id;
+public class RegisterFormBean {
+	
 	private String name;
 	private String contactPerson;
 	private String refCountryCode;
@@ -20,18 +17,8 @@ public class CustomerView
 	private String username;
 	private String password;
 	private String confirmPassword;
+	private Boolean termsConditions;
 	
-	public CustomerView()
-	{
-		this.id = UUID.randomUUID().toString();
-	}
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}
@@ -122,5 +109,11 @@ public class CustomerView
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
-
+	public Boolean getTermsConditions() {
+		return termsConditions;
+	}
+	public void setTermsConditions(Boolean termsConditions) {
+		this.termsConditions = termsConditions;
+	}
+	
 }

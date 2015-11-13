@@ -17,7 +17,7 @@ public class CustomerDAO extends CommonDAO implements ICustomerDAO
 
 	public Long addCustomer(Customer customer)
 	{
-		return (Long) getSqlMapClientTemplate().insert("insertCustomer", customer);
+		return (Long) getSqlMapClientTemplate().insert("addCustomer", customer);
 	}
 
 	public void updateCustomer(Customer customer)

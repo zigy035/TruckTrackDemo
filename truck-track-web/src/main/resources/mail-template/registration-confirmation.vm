@@ -1,0 +1,9 @@
+<html>
+    <body>
+        <h3>Hi ${user.firstName} ${user.lastName}, welcome to the TruckTrack cargo shipping platform</h3>
+        <div>
+            <p>Your email address is <a href="mailto:${customer.email}">${customer.email}</a>.</p>
+            <p>Please click <a href="localhost:8080/truck-track-web/auth/login">HERE</a> to log in.</p>
+        </div>
+    </body>
+</html>

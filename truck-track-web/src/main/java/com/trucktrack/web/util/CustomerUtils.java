@@ -1,22 +1,22 @@
 package com.trucktrack.web.util;
 
 import com.trucktrack.core.module.customer.model.Customer;
-import com.trucktrack.web.model.CustomerView;
+import com.trucktrack.web.form.RegisterFormBean;
 
 public class CustomerUtils
 {
-	public static Customer createCustomer(CustomerView customerView)
+	public static Customer createCustomer(RegisterFormBean formBean)
 	{
 		Customer customer = new Customer();
-		customer.setName(customerView.getName());
-		customer.setContactPerson(customerView.getContactPerson());
-		customer.setRefCountryCode(customerView.getRefCountryCode());
-		customer.setAddress(customerView.getAddress());
-		customer.setCity(customerView.getCity());
-		customer.setPostcode(customerView.getPostcode());
-		customer.setEmail(customerView.getEmail());
-		customer.setMemo(customerView.getMemo());
-		customer.setTelephone(customerView.getTelephone());
+		customer.setName(formBean.getName());
+		customer.setContactPerson(formBean.getContactPerson());
+		customer.setRefCountryCode(formBean.getRefCountryCode());
+		customer.setAddress(formBean.getAddress());
+		customer.setCity(formBean.getCity());
+		customer.setPostcode(formBean.getPostcode());
+		customer.setEmail(formBean.getEmail());
+		customer.setMemo(formBean.getMemo());
+		customer.setTelephone(formBean.getTelephone());
 		customer.setStatus(1);
 		
 		return customer;		

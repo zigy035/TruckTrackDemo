@@ -3,18 +3,18 @@ package com.trucktrack.web.util;
 import java.util.Calendar;
 
 import com.trucktrack.core.module.user.model.User;
-import com.trucktrack.web.model.CustomerView;
+import com.trucktrack.web.form.RegisterFormBean;
 
 public class UserUtils
 {
-	public static User createUser(CustomerView customerView)
+	public static User createUser(RegisterFormBean formBean)
 	{
 		User user = new User();
-		user.setRefCustomerId(customerView.getRefCountryCode());
-		user.setFirstName(customerView.getFirstName());
-		user.setLastName(customerView.getLastName());
-		user.setUsername(customerView.getUsername());
-		user.setPassword(customerView.getPassword());
+		user.setRefCustomerId(formBean.getRefCountryCode());
+		user.setFirstName(formBean.getFirstName());
+		user.setLastName(formBean.getLastName());
+		user.setUsername(formBean.getUsername());
+		user.setPassword(formBean.getPassword());
 		user.setTermsAccepted(false);
 		Calendar cal = Calendar.getInstance();
 		cal.set(2013, 1, 1);

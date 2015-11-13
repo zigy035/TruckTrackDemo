@@ -3,5 +3,6 @@
         
 <sqlMapConfig>
 	<sqlMap resource="sqlmaps/Cargo.xml" />
+	<sqlMap resource="sqlmaps/Customer.xml" />
 	<sqlMap resource="sqlmaps/User.xml" />
 </sqlMapConfig>

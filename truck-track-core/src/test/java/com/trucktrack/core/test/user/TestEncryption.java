@@ -1,6 +1,5 @@
 package com.trucktrack.core.test.user;
 
-import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 
 

@@ -26,9 +26,9 @@ public class TermsAcceptanceFilter implements Filter
 	{
 		String path = ((HttpServletRequest) request).getRequestURI();
 		String contextPath = ((HttpServletRequest) request).getContextPath();
-
+		
 		if (path != null && 
-				(path.contains("auth") || path.contains("terms") || path.contains("register") 
+				(path.contains("homepage") || path.contains("auth") || path.contains("terms") || path.contains("register") 
 				 || path.contains("public") || path.contains("passwordForgot") || path.contains("styles")) )
 		{
 			filterChain.doFilter(request, response);

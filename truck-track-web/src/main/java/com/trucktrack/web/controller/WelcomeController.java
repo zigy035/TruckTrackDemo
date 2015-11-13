@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.trucktrack.core.module.cargo.dao.ICargoDAO;
-import com.trucktrack.web.util.CountryUtils;
 
 @Controller
 public class WelcomeController
 {
-	protected static Logger logger = Logger.getLogger(WelcomeController.class);
+	private static final Logger LOG = Logger.getLogger(WelcomeController.class);
 	
 	@Autowired
 	private ICargoDAO cargoDAO;
@@ -21,7 +20,7 @@ public class WelcomeController
 	@RequestMapping("/")
 	public String getWelcomeData(Model model, @RequestParam(required = false) Integer currentPage)
 	{		
-		String criteria = " 1=1";
+		/*String criteria = " 1=1";
 		int recordsPerPage = 10;
 		int totalRows = cargoDAO.getCargosCount(" 1=1");
 		model.addAttribute("totalRows", totalRows);
@@ -40,7 +39,9 @@ public class WelcomeController
 		model.addAttribute("countryCodes", CountryUtils.getCountryCodes());
 		model.addAttribute("countryFrom", "");
 		model.addAttribute("countryTo", "");
+		*/
+		LOG.debug("Received request to show home page");
 		
-		return "cargoList";
+		return "homePage";
 	}
 }
