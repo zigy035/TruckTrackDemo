@@ -1,6 +1,4 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<!-- <h3>Header</h3>
-<p>Language: <a href="?lang=en">English</a> | <a href="?lang=de">Deutsch</a></p> -->
 <div id="logo">
 	<a href="index.html">
       <img src="<%=request.getContextPath()%>/styles/images/logo3.png" alt="TruckTrack Logo">
