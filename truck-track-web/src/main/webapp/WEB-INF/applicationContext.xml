@@ -54,6 +54,9 @@
 		parent="commonDAO">
 	</bean>
 	
+	<bean id="geoLocationDAO" class="com.trucktrack.core.module.geolocation.dao.impl.GeoLocationDAO" parent="commonDAO">
+	</bean>
+	
 	<bean id="cargoValidator" class="com.trucktrack.web.validator.CargoValidator">
 	</bean>
 

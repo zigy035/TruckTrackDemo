@@ -1,6 +1,7 @@
 package com.trucktrack.web.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,10 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.trucktrack.core.module.cargo.dao.ICargoDAO;
 import com.trucktrack.core.module.cargo.model.Cargo;
-import com.trucktrack.web.model.CargoView;
+import com.trucktrack.core.module.geolocation.dao.IGeoLocationDAO;
+import com.trucktrack.core.module.geolocation.model.City;
+import com.trucktrack.web.form.CargoFormBean;
 import com.trucktrack.web.util.CountryUtils;
 import com.trucktrack.web.validator.CargoValidator;
 
@@ -27,6 +31,9 @@ public class CargoController
 
 	@Autowired
 	private ICargoDAO cargoDAO;
+	
+	@Autowired
+	private IGeoLocationDAO geoLocationDAO;
 	
 	@Autowired
 	private CargoValidator cargoValidator;
@@ -79,18 +86,18 @@ public class CargoController
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String createForm(Model model)
 	{
-		model.addAttribute("cargoView", new CargoView());
+		model.addAttribute("cargoFormBean", new CargoFormBean());
 		return "cargoForm";
 	}
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	public String create(Model model, @ModelAttribute("cargoView") CargoView cargoView, BindingResult result)
+	public String create(Model model, CargoFormBean cargoFormBean, BindingResult result)
 	{
-		cargoValidator.validate(cargoView, result);
+		cargoValidator.validate(cargoFormBean, result);
 		if (result.hasErrors())
 		{
 			logger.error(result.getFieldErrors().toString());
-			model.addAttribute("cargoView", cargoView);
+			model.addAttribute("cargoFormBean", cargoFormBean);
 			return "cargoForm";
 		}
 		
@@ -98,15 +105,36 @@ public class CargoController
 		
 		// Will be changed when date-picker is set
 		cargo.setDeadline(new Date());
-		cargo.setAddressFrom(cargoView.getAddressFrom());
-		cargo.setAddressTo(cargoView.getAddressTo());
-		cargo.setDimLength(Double.valueOf(cargoView.getDimLength()));
-		cargo.setDimWeight(Double.valueOf(cargoView.getDimWeight()));
-		cargo.setType(cargoView.getType());
+		
+		cargo.setRefCountryCodeFrom(cargoFormBean.getRefCountryCodeFrom());
+		cargo.setCityFrom(cargoFormBean.getCityFrom());
+		cargo.setPostcodeFrom(cargoFormBean.getPostCodeFrom());
+		
+		cargo.setRefCountryCodeTo(cargoFormBean.getRefCountryCodeTo());
+		cargo.setCityTo(cargoFormBean.getCityTo());
+		cargo.setPostcodeTo(cargoFormBean.getCityTo());
+		
+		cargo.setDimLength(Double.valueOf(cargoFormBean.getDimLength()));
+		cargo.setDimWeight(Double.valueOf(cargoFormBean.getDimWeight()));
+		cargo.setType(cargoFormBean.getType());
 		
 		cargoDAO.addCargo(cargo);
 		
 		return "redirect:/cargo/list";
+	}
+	
+	@RequestMapping(value = "/getCities", method = RequestMethod.GET)
+	public @ResponseBody List<City> getCities(@RequestParam("term") String query) {
+		String criteria = "c.name LIKE '%" + query + "%'";
+		List<City> cities = geoLocationDAO.getAllCities(criteria);
+		System.out.println("Number of cities: " + cities.size());
+		return cities;
+	}
+	
+	@ModelAttribute("countryCodes")
+	public List<String> getSupportedStoreLocations()
+	{
+	    return CountryUtils.getCountryCodes();
 	}
 	
 }

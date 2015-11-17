@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="cityMap">
+	
+	<resultMap id="cityResultMap" class="com.trucktrack.core.module.geolocation.model.City">
+		<result property="id" column="id" jdbcType="VARCHAR" />
+		<result property="name" column="name" jdbcType="VARCHAR" />
+		<result property="postcode" column="postcode" jdbcType="VARCHAR" />
+		<result property="allowed" column="allowed" jdbcType="BOOLEAN" />
+		<result property="refCountryCode" column="ref_country_code" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="getCities" resultMap="cityResultMap">
+	<![CDATA[
+		SELECT c.id, c.name, c.postcode, c.allowed, c.ref_country_code
+		FROM tt_city c
+ 		WHERE $criteria$
+	]]>
+	</select>
+	
+	<insert id="addCity">
+		INSERT INTO tt_city VALUES 
+		(#id#, #name#, #postcode#, #allowed#, #refCountryCode#)
+	</insert>
+	
+	<update id="updateCity">
+		UPDATE tt_city
+		SET name = #name#,
+			postcode = #postcode#,
+			allowed = #allowed#,
+			refCountryCode = #refCountryCode#
+		WHERE id = #id#
+	</update>
+	
+	<delete id="deleteCity">
+		DELETE FROM tt_city
+		WHERE id = #id#
+	</delete>
+	
+</sqlMap>

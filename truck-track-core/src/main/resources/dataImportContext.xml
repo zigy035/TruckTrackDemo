@@ -34,6 +34,9 @@
 	<bean id="cargoDAO" class="com.trucktrack.core.module.cargo.dao.impl.CargoDAO" parent="commonDAO">
 	</bean>
 
+	<bean id="geoLocationDAO" class="com.trucktrack.core.module.geolocation.dao.impl.GeoLocationDAO" parent="commonDAO">
+	</bean>
+
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
