@@ -6,11 +6,11 @@ import com.trucktrack.core.module.vehicle.model.Vehicle;
 
 public interface IVehicleDAO
 {
-	Vehicle getProjectById(long id);
+	Vehicle getVehicle(String id);
 
-	List<Vehicle> getAllProjects();
+	List<Vehicle> getVehicles(String criteria);
 
-	Long insert(Vehicle vehicle);
+	void add(Vehicle vehicle);
 
 	void update(Vehicle vehicle);
 

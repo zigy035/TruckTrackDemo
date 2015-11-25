@@ -9,4 +9,6 @@ public interface IGeoLocationDAO {
 	void addCity(City city);
 	
 	List<City> getAllCities(String criteria);
+	
+	List<City> getCitiesByCountry(String isoCode);
 }

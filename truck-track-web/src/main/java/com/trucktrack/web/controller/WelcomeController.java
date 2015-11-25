@@ -17,7 +17,7 @@ public class WelcomeController
 	@Autowired
 	private ICargoDAO cargoDAO;
 	
-	@RequestMapping("/")
+	@RequestMapping(value={"/", "/homepage"})
 	public String getWelcomeData(Model model, @RequestParam(required = false) Integer currentPage)
 	{		
 		/*String criteria = " 1=1";

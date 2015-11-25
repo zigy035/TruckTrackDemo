@@ -18,8 +18,10 @@ public class CustomerController
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String getCustomers(Model model)
 	{
-		model.addAttribute("customers", customerDAO.getCustomers());
-		return "customer/list";
+		StringBuilder criteria = new StringBuilder();
+		criteria.append(" 1=1");
+		model.addAttribute("customers", customerDAO.getCustomers(criteria.toString()));
+		return "customerList";
 	}
 
 }

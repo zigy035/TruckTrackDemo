@@ -6,7 +6,7 @@ import com.trucktrack.core.module.customer.model.Customer;
 
 public interface ICustomerDAO
 {
-	List<Customer> getCustomers();
+	List<Customer> getCustomers(String criteria);
 	
 	Customer getCustomerById(String id);
 	

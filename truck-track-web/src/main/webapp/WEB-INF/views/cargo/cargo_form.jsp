@@ -6,7 +6,15 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		$(document).ready(function() {
-			$('#deadlineDate').datepicker();
+			$("#deadlineDate").datepicker({
+				showOn: "button",
+				buttonImage: "${pageContext.request.contextPath}/styles/images/calendar1.gif",
+				buttonImageOnly: true,
+				buttonText: "Select date",
+				changeMonth: true,
+			    changeYear: true,
+			    dateFormat: "dd/mm/yy"		    
+		    });
 		});
 		
 		addressFieldsAutocomplete('refCountryCodeFrom', 'postCodeFrom', 'cityFrom');

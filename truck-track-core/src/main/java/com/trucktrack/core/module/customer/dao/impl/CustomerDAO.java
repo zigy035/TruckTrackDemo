@@ -10,9 +10,9 @@ public class CustomerDAO extends CommonDAO implements ICustomerDAO
 {
 
 	@SuppressWarnings("unchecked")
-	public List<Customer> getCustomers()
+	public List<Customer> getCustomers(String criteria)
 	{
-		return getSqlMapClientTemplate().queryForList("getCustomers");
+		return getSqlMapClientTemplate().queryForList("getCustomers", criteria);
 	}
 
 	public Long addCustomer(Customer customer)

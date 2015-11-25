@@ -8,46 +8,67 @@
 		<result property="published" column="published" jdbcType="TIMESTAMP" />
 		<result property="deadline" column="deadline" jdbcType="TIMESTAMP" />
 		<result property="refCountryCodeFrom" column="ref_country_code_from" jdbcType="VARCHAR" />
-		<result property="addressFrom" column="address_from" jdbcType="VARCHAR" />
 		<result property="cityFrom" column="city_from" jdbcType="VARCHAR" />
-		<result property="postcodeFrom" column="postcode_from" jdbcType="VARCHAR" />
+		<result property="postCodeFrom" column="postcode_from" jdbcType="VARCHAR" />
 		<result property="refCountryCodeTo" column="ref_country_code_to" jdbcType="VARCHAR" />
-		<result property="addressTo" column="address_to" jdbcType="VARCHAR" />
 		<result property="cityTo" column="city_to" jdbcType="VARCHAR" />
-		<result property="postcodeTo" column="postcode_to" jdbcType="VARCHAR" />
-		<result property="dimLength" column="dim_length" jdbcType="DECIMAL" />
-		<result property="dimWeight" column="dim_weight" jdbcType="DECIMAL" />
-		<result property="type" column="type" jdbcType="VARCHAR" />
+		<result property="postCodeTo" column="postcode_to" jdbcType="VARCHAR" />
+		<result property="dimLength" column="dim_length" jdbcType="VARCHAR" />
+		<result property="dimWeight" column="dim_weight" jdbcType="VARCHAR" />
+		<result property="vehicleType" column="vehicle_type" jdbcType="INTEGER" />
+		<result property="refCustomerId" column="ref_customer_id" jdbcType="VARCHAR" />
 	</resultMap>
 
 	<select id="getCargo" resultMap="cargoResultMap">
-		SELECT c.id, c.published, c.deadline, c.ref_country_code_from, c.address_from, c.city_from, c.postcode_from, 
-			c.ref_country_code_to, c.address_to, c.city_to, c.postcode_to, c.dim_length, c.dim_weight, c.type 
-		FROM tt_cargo c
+		SELECT c.id, c.published, c.deadline, c.ref_country_code_from, c.city_from, c.postcode_from, 
+			c.ref_country_code_to, c.city_to, c.postcode_to, c.dim_length, c.dim_weight, c.vehicle_type, ref_customer_id
+		FROM tt_cargo c 
 		WHERE c.id = #id#
 	</select>
 	
 	<select id="getCargos" resultMap="cargoResultMap">
 	<![CDATA[
-		SELECT c.id, c.published, c.deadline, c.ref_country_code_from, c.address_from, c.city_from, c.postcode_from, 
-			c.ref_country_code_to, c.address_to, c.city_to, c.postcode_to, c.dim_length, c.dim_weight, c.type
+		SELECT c.id, c.published, c.deadline, c.ref_country_code_from, c.city_from, c.postcode_from, 
+			c.ref_country_code_to, c.city_to, c.postcode_to, c.dim_length, c.dim_weight, c.vehicle_type, ref_customer_id
+		FROM tt_cargo c 
  		WHERE $criteria$
 	]]>
 	</select>
-
+	
+	<select id="getCargosWithLimit" resultMap="cargoResultMap">
+	<![CDATA[
+		SELECT c.id, c.published, c.deadline, c.ref_country_code_from, c.city_from, c.postcode_from, 
+			c.ref_country_code_to, c.city_to, c.postcode_to, c.dim_length, c.dim_weight, c.vehicle_type, ref_customer_id
+		FROM tt_cargo c 
+ 		WHERE $criteria$ $limit$
+	]]>
+	</select>
+	
+	<select id="getCargosCount" resultClass="java.lang.Integer">
+	<![CDATA[
+		SELECT COUNT(c.id)
+		FROM tt_cargo c 
+ 		WHERE $criteria$
+	]]>
+	</select>
+	
 	<insert id="addCargo">
 		INSERT INTO tt_cargo VALUES 
-		(#id#, #published#, #deadline#, #refCountryCodeFrom#, #addressFrom#, #cityFrom#, #postcodeFrom#, #refCountryCodeTo#, #addressTo#, #cityTo#, #postcodeTo#, #dimLength#, #dimWeight#, #type#)
+		(#id#, #published#, #deadline#, #refCountryCodeFrom#, #cityFrom#, #postCodeFrom#, #refCountryCodeTo#, #cityTo#, #postCodeTo#, #dimLength#, #dimWeight#, #vehicleType#, #refCustomerId#)
 	</insert>
 	
 	<update id="updateCargo">
 		UPDATE tt_cargo
 		SET deadline = #deadline#,
-			address_from = #addressFrom#,
-			address_to = #addressTo#,
+			ref_country_code_from = #refCountryCodeFrom#,
+			city_from = #cityFrom#,
+			postcode_from = #postCodeFrom#,
+			ref_country_code_to = #refCountryCodeTo#,
+			city_to = #cityTo#,
+			postcode_to = #postCodeTo#,
 			dim_length = #dimLength#,
 			dim_weight = #dimWeight#,
-			type = #type#
+			vehicle_type = #vehicleType#
 		WHERE id = #id#
 	</update>
 	

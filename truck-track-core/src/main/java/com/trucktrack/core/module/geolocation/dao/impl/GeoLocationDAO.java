@@ -19,4 +19,10 @@ public class GeoLocationDAO extends CommonDAO implements IGeoLocationDAO {
 		return getSqlMapClientTemplate().queryForList("getCities", criteria);
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<City> getCitiesByCountry(String isoCode) {
+		return getSqlMapClientTemplate().queryForList("getCitiesByCountry", isoCode);
+	}
+	
 }

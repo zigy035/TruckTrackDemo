@@ -19,6 +19,12 @@
 	]]>
 	</select>
 	
+	<select id="getCitiesByCountry" resultMap="cityResultMap">
+		SELECT c.id, c.name, c.postcode, c.allowed, c.ref_country_code
+		FROM tt_city c
+ 		WHERE c.ref_country_code = #isoCode#
+	</select>
+	
 	<insert id="addCity">
 		INSERT INTO tt_city VALUES 
 		(#id#, #name#, #postcode#, #allowed#, #refCountryCode#)

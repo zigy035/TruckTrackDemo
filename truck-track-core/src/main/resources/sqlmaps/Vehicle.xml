@@ -1,39 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
-<sqlMap namespace="projectMap">
+<sqlMap namespace="vehicleMap">
 
-	<resultMap id="projectResultMap" class="com.trucktrack.core.module.vehicle.model.Vehicle">
-		<result property="id" column="id" />
-		<result property="name" column="name" />
+	<resultMap id="vehicleResultMap" class="com.trucktrack.core.module.vehicle.model.Vehicle">
+		<result property="id" column="id" jdbcType="VARCHAR" />
+		<result property="published" column="published" jdbcType="TIMESTAMP" />
+		<result property="deadline" column="deadline" jdbcType="TIMESTAMP" />
+		<result property="refCountryCodeFrom" column="ref_country_code_from" jdbcType="VARCHAR" />
+		<result property="cityFrom" column="city_from" jdbcType="VARCHAR" />
+		<result property="postCodeFrom" column="postcode_from" jdbcType="VARCHAR" />
+		<result property="refCountryCodeTo" column="ref_country_code_to" jdbcType="VARCHAR" />
+		<result property="cityTo" column="city_to" jdbcType="VARCHAR" />
+		<result property="postCodeTo" column="postcode_to" jdbcType="VARCHAR" />
+		<result property="dimLength" column="dim_length" jdbcType="DECIMAL" />
+		<result property="dimWeight" column="dim_weight" jdbcType="DECIMAL" />
+		<result property="vehicleType" column="vehicle_type" jdbcType="INTEGER" />
+		<result property="refCustomerId" column="ref_customer_id" jdbcType="VARCHAR" />
 	</resultMap>
 
-	<select id="getAllProjects" resultMap="projectResultMap">
-		SELECT p.id, p.name
-		FROM project p
+	<select id="getVehicle" resultMap="vehicleResultMap">
+		SELECT v.id, v.published, v.deadline, v.ref_country_code_from, v.city_from, v.postcode_from, 
+			v.ref_country_code_to, v.city_to, v.postcode_to, v.dim_length, v.dim_weight, v.vehicle_type, ref_customer_id
+		FROM tt_vehicle v 
+		WHERE v.id = #id#
 	</select>
-
-	<select id="getProjectById" resultMap="projectResultMap">
-		SELECT p.id, p.name
-		FROM project p
-		WHERE id = #id#
+	
+	<select id="getVehicles" resultMap="vehicleResultMap">
+	<![CDATA[
+		SELECT v.id, v.published, v.deadline, v.ref_country_code_from, v.city_from, v.postcode_from, 
+			v.ref_country_code_to, v.city_to, v.postcode_to, v.dim_length, v.dim_weight, v.vehicle_type, ref_customer_id
+		FROM tt_vehicle v 
+ 		WHERE $criteria$
+	]]>
 	</select>
-
-	<insert id="insertProject">
-		INSERT INTO project (name) values (#name#)
-		<selectKey resultClass="Long" keyProperty="id">
-			SELECT LAST_INSERT_ID() as id
-		</selectKey>
+	
+	<select id="getVehiclesWithLimit" resultMap="vehicleResultMap">
+	<![CDATA[
+		SELECT v.id, v.published, v.deadline, v.ref_country_code_from, v.city_from, v.postcode_from, 
+			v.ref_country_code_to, v.city_to, v.postcode_to, v.dim_length, v.dim_weight, v.vehicle_type, ref_customer_id
+		FROM tt_vehicle v 
+ 		WHERE $criteria$ $limit$
+	]]>
+	</select>
+	
+	<select id="getVehiclesCount" resultClass="java.lang.Integer">
+	<![CDATA[
+		SELECT COUNT(v.id)
+		FROM tt_vehicle v 
+ 		WHERE $criteria$
+	]]>
+	</select>
+	
+	<insert id="addVehicle">
+		INSERT INTO tt_vehicle VALUES 
+		(#id#, #published#, #deadline#, #refCountryCodeFrom#, #cityFrom#, #postCodeFrom#, #refCountryCodeTo#, #cityTo#, #postCodeTo#, #dimLength#, #dimWeight#, #vehicleType#, #refCustomerId#)
 	</insert>
-
-	<update id="updateProject">
-		UPDATE project
-		SET name = #name#
+	
+	<update id="updateVehicle">
+		UPDATE tt_vehicle
+		SET deadline = #deadline#,
+			ref_country_code_from = #refCountryCodeFrom#,
+			city_from = #cityFrom#,
+			postcode_from = #postCodeFrom#,
+			ref_country_code_to = #refCountryCodeTo#,
+			city_to = #cityTo#,
+			postcode_to = #postCodeTo#,
+			dim_length = #dimLength#,
+			dim_weight = #dimWeight#,
+			vehicle_type = #vehicleType#
 		WHERE id = #id#
 	</update>
-
-	<delete id="deleteProject">
-		DELETE FROM project 
+	
+	<delete id="deleteVehicle">
+		DELETE FROM tt_vehicle
 		WHERE id = #id#
 	</delete>
 	

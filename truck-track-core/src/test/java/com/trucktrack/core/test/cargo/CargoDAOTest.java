@@ -3,28 +3,49 @@ package com.trucktrack.core.test.cargo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.trucktrack.core.module.cargo.dao.ICargoDAO;
 import com.trucktrack.core.module.cargo.model.Cargo;
-import com.trucktrack.core.test.CommonTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:applicationContext-test.xml")
-public class CargoDAOTest extends CommonTest
+@ContextConfiguration("classpath*:com/trucktrack/core/test/applicationContext-test.xml")
+@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
+@Transactional
+public class CargoDAOTest extends AbstractTransactionalJUnit4SpringContextTests
 {
 	private static final String DEADLINE = "2012-12-12";
-	private static final String ADDRESS_FROM = "addressFrom";
-	private static final String ADDRESS_TO = "addressTo";
-	private static final Double DIM_LENGTH = 100.0;
-	private static final Double DIM_WEIGHT= 50.0;
-	private static final String TYPE = "CONTAINER";
+	private static final Double DIM_LENGTH = 14.5;
+	private static final Double DIM_WEIGHT= 2.4;
+	private static final Integer TYPE = 1;
+	public static final String OBJECT_ID = "uniqueObjectId";
+	public static final String NEW = "New";
+	public static final String UPDATED = "Updated";
+
 	
+	public Date parseDate(String strDate)
+	{
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try
+		{
+			return dateFormat.parse(strDate);
+		}
+		catch (Exception e)
+		{
+			return new Date();
+		}
+	}
 	
 	@Autowired
 	private ICargoDAO cargoDAO;
@@ -39,15 +60,13 @@ public class CargoDAOTest extends CommonTest
 		cargo.setDeadline(parseDate(DEADLINE));
 		cargo.setRefCountryCodeFrom("RS");
 		cargo.setRefCountryCodeTo("AT");
-		cargo.setAddressFrom(ADDRESS_FROM);
-		cargo.setAddressTo(ADDRESS_TO);
 		cargo.setCityFrom("Belgrade");
 		cargo.setCityTo("Wien");
-		cargo.setPostcodeFrom("11000");
-		cargo.setPostcodeTo("41500");
+		cargo.setPostCodeFrom("11000");
+		cargo.setPostCodeTo("41500");
 		cargo.setDimLength(DIM_LENGTH);
 		cargo.setDimWeight(DIM_WEIGHT);
-		cargo.setType(TYPE);
+		cargo.setVehicleType(TYPE);
 		
 		cargoDAO.addCargo(cargo);
 	}
@@ -59,27 +78,23 @@ public class CargoDAOTest extends CommonTest
 		Cargo cargo = cargoDAO.getCargo(OBJECT_ID);
 		
 		assertEquals(OBJECT_ID, cargo.getId());
-		assertEquals(ADDRESS_FROM, cargo.getAddressFrom());
-		assertEquals(ADDRESS_TO, cargo.getAddressTo());
-		assertEquals(TYPE, cargo.getType());
+		assertEquals(TYPE, cargo.getVehicleType());
 	}
 	
 	@Test
 	public void testUpdateCargo()
 	{
 		cargo.setDeadline(parseDate(DEADLINE));
-		cargo.setAddressFrom(UPDATED + ADDRESS_FROM);
-		cargo.setAddressTo(UPDATED + ADDRESS_TO);
-		cargo.setType(UPDATED + TYPE);
+		cargo.setVehicleType(TYPE);
 		
 		cargoDAO.updateCargo(cargo);
 		
 		Cargo updatedCargo = cargoDAO.getCargo(OBJECT_ID);
 		
 		assertEquals(OBJECT_ID, updatedCargo.getId());
-		assertEquals(UPDATED + ADDRESS_FROM, updatedCargo.getAddressFrom());
-		assertEquals(UPDATED + ADDRESS_TO, updatedCargo.getAddressTo());
-		assertEquals(UPDATED + TYPE, updatedCargo.getType());
+/*		assertEquals(UPDATED + ADDRESS_FROM, updatedCargo.getAddressFrom());
+		assertEquals(UPDATED + ADDRESS_TO, updatedCargo.getAddressTo());*/		
+		assertEquals(UPDATED + TYPE, updatedCargo.getVehicleType());
 	}
 	
 	@Test

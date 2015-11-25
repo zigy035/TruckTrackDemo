@@ -3,13 +3,14 @@ package com.trucktrack.web.controller;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,13 +20,14 @@ import com.trucktrack.core.module.cargo.dao.ICargoDAO;
 import com.trucktrack.core.module.cargo.model.Cargo;
 import com.trucktrack.core.module.geolocation.dao.IGeoLocationDAO;
 import com.trucktrack.core.module.geolocation.model.City;
+import com.trucktrack.core.module.user.model.User;
 import com.trucktrack.web.form.CargoFormBean;
 import com.trucktrack.web.util.CountryUtils;
 import com.trucktrack.web.validator.CargoValidator;
 
 @Controller
 @RequestMapping(value = "/cargo")
-public class CargoController
+public class CargoController extends AbstractController
 {
 	private Logger logger = LoggerFactory.getLogger(CargoController.class);
 
@@ -67,20 +69,18 @@ public class CargoController
 		return "cargoList";
 	}
 	
-	private String buildCriteria(String countryFrom, String countryTo)
-	{
-		StringBuilder criteria = new StringBuilder();
-		criteria.append(" 1=1");			
-		if (countryFrom != null && !countryFrom.isEmpty())
-		{
-			criteria.append(" AND c.ref_country_code_from = '").append(countryFrom).append("'");
-		}			
-		if (countryTo != null && !countryTo.isEmpty())
-		{
-			criteria.append(" AND c.ref_country_code_to = '").append(countryTo).append("'");
-		}
+	@RequestMapping(value = "/search", method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody List<Cargo> search(
+			@RequestParam(value = "countryFrom", required = false) String countryFrom, 
+			@RequestParam(value = "countryTo", required = false) String countryTo) {
 		
-		return criteria.toString();
+		String criteria = buildCriteria(countryFrom, countryTo);
+		
+		List<Cargo> cargos = cargoDAO.getCargos(criteria);
+		System.out.println("Num of cargos: " + cargos.size());
+		
+		return cargos;
 	}
 
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
@@ -108,15 +108,15 @@ public class CargoController
 		
 		cargo.setRefCountryCodeFrom(cargoFormBean.getRefCountryCodeFrom());
 		cargo.setCityFrom(cargoFormBean.getCityFrom());
-		cargo.setPostcodeFrom(cargoFormBean.getPostCodeFrom());
+		cargo.setPostCodeFrom(cargoFormBean.getPostCodeFrom());
 		
 		cargo.setRefCountryCodeTo(cargoFormBean.getRefCountryCodeTo());
 		cargo.setCityTo(cargoFormBean.getCityTo());
-		cargo.setPostcodeTo(cargoFormBean.getCityTo());
+		cargo.setPostCodeTo(cargoFormBean.getCityTo());
 		
 		cargo.setDimLength(Double.valueOf(cargoFormBean.getDimLength()));
 		cargo.setDimWeight(Double.valueOf(cargoFormBean.getDimWeight()));
-		cargo.setType(cargoFormBean.getType());
+		cargo.setVehicleType(cargoFormBean.getType());
 		
 		cargoDAO.addCargo(cargo);
 		
@@ -131,10 +131,28 @@ public class CargoController
 		return cities;
 	}
 	
-	@ModelAttribute("countryCodes")
-	public List<String> getSupportedStoreLocations()
+	private String buildCriteria(String countryFrom, String countryTo)
 	{
-	    return CountryUtils.getCountryCodes();
+		User user = getLoggedUser();
+		StringBuilder criteria = new StringBuilder();
+		
+		criteria.append("1=1 ");
+		
+		// USER==0 ADMIN==1
+		if (user.getAccess() == 0) {
+	    	criteria.append("AND c.ref_customer_id <> '").append(user.getRefCustomerId()).append("' ");
+	    }
+		
+		if (StringUtils.isNotBlank(countryFrom))
+		{
+			criteria.append("AND c.ref_country_code_from = '").append(countryFrom).append("' ");
+		}			
+		if (StringUtils.isNotBlank(countryTo))
+		{
+			criteria.append("AND c.ref_country_code_to = '").append(countryTo).append("' ");
+		}
+		
+		return criteria.toString();
 	}
 	
 }

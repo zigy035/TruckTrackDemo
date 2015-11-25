@@ -35,7 +35,7 @@ public class CargoValidator implements Validator
 		}
 		if (StringUtils.isBlank(cargoFormBean.getPostCodeFrom()))
 		{
-			errors.rejectValue("postcodeFrom", "cargo.postcodefrom.required");
+			errors.rejectValue("postCodeFrom", "cargo.postcodefrom.required");
 		}
 		
 		if (StringUtils.isBlank(cargoFormBean.getRefCountryCodeTo()))
@@ -59,7 +59,7 @@ public class CargoValidator implements Validator
 		{
 			errors.rejectValue("dimWeight", "cargo.weight.required");
 		}
-		if (StringUtils.isBlank(cargoFormBean.getType()))
+		if (cargoFormBean.getType() == null)
 		{
 			errors.rejectValue("type", "cargo.type.required");
 		}

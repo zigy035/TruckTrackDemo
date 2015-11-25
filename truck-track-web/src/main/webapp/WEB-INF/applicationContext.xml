@@ -47,17 +47,23 @@
 	<bean id="customerDAO" class="com.trucktrack.core.module.customer.dao.impl.CustomerDAO" parent="commonDAO">
 	</bean>
 
-	<bean id="customerService" class="com.trucktrack.core.module.customer.service.impl.CustomerService" />
-		
-	<bean id="cargoDAO" 
-		class="com.trucktrack.core.module.cargo.dao.impl.CargoDAO" 
-		parent="commonDAO">
+	<bean id="cargoDAO" class="com.trucktrack.core.module.cargo.dao.impl.CargoDAO" parent="commonDAO">
 	</bean>
 	
+	<bean id="vehicleDAO" class="com.trucktrack.core.module.vehicle.dao.impl.VehicleDAO" parent="commonDAO">
+	</bean>
+
 	<bean id="geoLocationDAO" class="com.trucktrack.core.module.geolocation.dao.impl.GeoLocationDAO" parent="commonDAO">
 	</bean>
 	
+	
+	<bean id="customerService" class="com.trucktrack.core.module.customer.service.impl.CustomerService" />
+		
+	
 	<bean id="cargoValidator" class="com.trucktrack.web.validator.CargoValidator">
+	</bean>
+
+	<bean id="vehicleValidator" class="com.trucktrack.web.validator.VehicleValidator">
 	</bean>
 
 	<bean id="customerValidator" class="com.trucktrack.web.validator.CustomerValidator">

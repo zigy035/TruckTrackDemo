@@ -34,7 +34,7 @@
 		required="true" rtexprvalue="true" 
 		description="Selected Code" />
 
-	<select id="id" name="${name}">
+	<select id="${id}" name="${name}">
 		<option value=""><spring:message code="please.select.country" /></option>
 		<!-- 
 		<c:forEach items="${countryCodes}" var="countryCode">

@@ -81,19 +81,17 @@ public class CargoImporter
 				cargo.setPublished(new Date());
 				cargo.setDeadline(parseDate(deadline));
 				
-				cargo.setAddressFrom(addressFrom);
 				cargo.setRefCountryCodeFrom(addressFromParts[0]);
-				cargo.setPostcodeFrom(addressFromParts[1]);
+				cargo.setPostCodeFrom(addressFromParts[1]);
 				cargo.setCityFrom(cityFromStringBuilder.toString());
 				
-				cargo.setAddressTo(addressTo);
 				cargo.setRefCountryCodeTo(addressToParts[0]);
-				cargo.setPostcodeTo(addressToParts[1]);
+				cargo.setPostCodeTo(addressToParts[1]);
 				cargo.setCityTo(cityToStringBuilder.toString());
 				
 				cargo.setDimLength(Double.valueOf(dimLength));
 				cargo.setDimWeight(Double.valueOf(dimWeight));
-				cargo.setType(type);
+//				cargo.setType(type);
 				
 				cargoDAO.addCargo(cargo);	
 			}

@@ -14,7 +14,7 @@ public class TestEncryption
 //		ConfigurablePasswordEncryptor passwordEncryptor = new ConfigurablePasswordEncryptor();
 		
 		ShaPasswordEncoder passwordEncoder = new ShaPasswordEncoder();
-		String encodedPassword = passwordEncoder.encodePassword("admin", null);
+		String encodedPassword = passwordEncoder.encodePassword("markus", null);
 		
 //		passwordEncryptor.setPlainDigest(true);
 //		passwordEncryptor.setAlgorithm("SHA-1");

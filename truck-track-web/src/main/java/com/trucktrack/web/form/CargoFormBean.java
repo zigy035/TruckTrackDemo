@@ -12,7 +12,7 @@ public class CargoFormBean {
 	private String postCodeTo;
 	private String dimLength;
 	private String dimWeight;
-	private String type;
+	private Integer type;
 	
 	public String getPublished() {
 		return published;
@@ -74,10 +74,10 @@ public class CargoFormBean {
 	public void setDimWeight(String dimWeight) {
 		this.dimWeight = dimWeight;
 	}
-	public String getType() {
+	public Integer getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(Integer type) {
 		this.type = type;
 	}
 	

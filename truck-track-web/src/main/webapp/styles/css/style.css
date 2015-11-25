@@ -167,6 +167,16 @@ table.container td {
 .flag_AT:before {
     content: url("../images/flags/AT_flag.png");
 }
+.flag_ES:before {
+    content: url("../images/flags/ES_flag.png");
+}
+.flag_FR:before {
+    content: url("../images/flags/FR_flag.png");
+}
+.flag_NL:before {
+    content: url("../images/flags/NL_flag.png");
+}
+
 
 table.sample {
 	border-collapse: collapse;
@@ -231,7 +241,7 @@ span.error { color:red; }
 	font-family: Open Sans,sans-serif;
 	border: 1px solid #95BCE2;
 	background-color: #ECF6FC;
-	width: 420px;
+	width: 450px;
 	margin: 24px;
 }
 
@@ -252,6 +262,19 @@ span.error { color:red; }
 	font-weight: bold;
   	padding: 3px;
   	color: #333;
+}
+
+.form_content p img {
+	float: right;
+	width: 32px;
+}
+
+div.ui-datepicker {
+	font-size: 14px;
+}
+
+ul.ui-autocomplete {
+	font-size: 14px;
 }
 
 .form_content p input, 
