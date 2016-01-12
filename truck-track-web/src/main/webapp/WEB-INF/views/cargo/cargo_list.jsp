@@ -98,26 +98,28 @@
 	</c:forEach>	
 </table>
 
-<ul id="pagination">
-	
-	<c:set var="countryCondition" value="countryFrom=${countryFrom}&countryTo=${countryTo}" />
-	
-	<c:if test="${currentPage != 1}">
-		<li class="prev">
-			<a href="${searchCargoURL}?${countryCondition}&currentPage=${currentPage-1}">&lsaquo; Prev</a>
-		</li>
-	</c:if>
-	
-	<c:forEach var="i" begin="1" end="${pageCount}" step="1">
-		<li class="${currentPage == i ? 'active' : ''}">
-			<a href="${searchCargoURL}?${countryCondition}&currentPage=${i}">${i}</a>
-		</li>
-	</c:forEach>
-	
-	<c:if test="${currentPage != pageCount}">
-		<li class="next">
-			<a href="${searchCargoURL}?${countryCondition}&currentPage=${currentPage+1}">Next &rsaquo;</a>
-		</li>
-	</c:if>
-	
-</ul>
+<div class="pagincenter">
+	<ul class="pagination">
+		
+		<c:set var="countryCondition" value="countryFrom=${countryFrom}&countryTo=${countryTo}" />
+		
+		<c:if test="${currentPage != 1}">
+			<li class="prev">
+				<a href="${searchCargoURL}?${countryCondition}&currentPage=${currentPage-1}">&laquo;</a>
+			</li>
+		</c:if>
+ 		
+		<c:forEach var="i" begin="${startIndex}" end="${endIndex}" step="1">
+			<li>
+				<a class="${currentPage == i ? 'active' : ''}" href="${searchCargoURL}?${countryCondition}&currentPage=${i}">${i}</a>
+			</li>
+		</c:forEach>
+		
+		<c:if test="${currentPage != pageCount}">
+			<li class="next">
+				<a href="${searchCargoURL}?${countryCondition}&currentPage=${currentPage+1}">&raquo;</a>
+			</li>
+		</c:if>
+		
+	</ul>
+</div>

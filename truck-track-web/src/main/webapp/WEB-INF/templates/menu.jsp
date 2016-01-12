@@ -8,7 +8,7 @@
 		<li><a href="<%=request.getContextPath()%>/vehicle/list">Vehicles</a></li>
 		<li><a href="<%=request.getContextPath()%>/customer/list">Customers</a></li>
 		<li><a href="<%=request.getContextPath()%>/register/form">Register</a></li>
-		<sec:authorize access="hasRole('ADMIN')">
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
 			<li><a href="<%=request.getContextPath()%>/country/list">Countries</a></li>
 			<li><a href="<%=request.getContextPath()%>/config">Configuration</a></li>
 			<li><a href="<%=request.getContextPath()%>/datagenerator">Data Generator</a></li>			

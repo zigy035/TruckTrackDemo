@@ -6,8 +6,14 @@ import com.trucktrack.core.module.geolocation.model.City;
 
 public interface IGeoLocationDAO {
 	
-	void addCity(City city);
+	City getCity(String id);
 	
+	void addCity(City city);
+
+	void updateCity(City city);
+	
+	void deleteCity(String id);
+
 	List<City> getAllCities(String criteria);
 	
 	List<City> getCitiesByCountry(String isoCode);

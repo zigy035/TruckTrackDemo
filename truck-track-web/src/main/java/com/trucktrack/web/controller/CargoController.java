@@ -59,6 +59,8 @@ public class CargoController extends AbstractController
 			currentPage = 1;
 		}
 		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startIndex", calcStartIndex(currentPage));
+		model.addAttribute("endIndex", calcEndIndex(currentPage, pageCount));
 		
 		model.addAttribute("cargos", cargoDAO.getCargosWithLimit(criteria, currentPage, recordsPerPage));
 		
@@ -67,6 +69,27 @@ public class CargoController extends AbstractController
 		model.addAttribute("countryTo", countryTo);
 		
 		return "cargoList";
+	}
+	
+	private int calcStartIndex(int currentPage) {
+		if (currentPage % 10 == 0) {
+			return currentPage - 10 + 1;
+		} else {
+			return (currentPage/10)*10+1;
+		}
+	}
+	
+	private int calcEndIndex(int currentPage, int pageCount) {
+		int endIndex = 0;
+		if (currentPage % 10 == 0) {
+			endIndex = currentPage;
+		} else {
+			endIndex = (currentPage/10+1)*10;
+		}
+		if (endIndex > pageCount) {
+			return pageCount;
+		}
+		return endIndex;
 	}
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET, 

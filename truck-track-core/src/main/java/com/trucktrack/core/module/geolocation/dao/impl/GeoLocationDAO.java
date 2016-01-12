@@ -13,6 +13,16 @@ public class GeoLocationDAO extends CommonDAO implements IGeoLocationDAO {
 		getSqlMapClientTemplate().insert("addCity", city);
 	}
 
+	@Override
+	public void updateCity(City city) {
+		getSqlMapClientTemplate().update("updateCity", city);
+	}
+	
+	@Override
+	public void deleteCity(String id) {
+		getSqlMapClientTemplate().delete("deleteCity", id);
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<City> getAllCities(String criteria) {
@@ -23,6 +33,11 @@ public class GeoLocationDAO extends CommonDAO implements IGeoLocationDAO {
 	@Override
 	public List<City> getCitiesByCountry(String isoCode) {
 		return getSqlMapClientTemplate().queryForList("getCitiesByCountry", isoCode);
+	}
+
+	@Override
+	public City getCity(String id) {
+		return (City) getSqlMapClientTemplate().queryForObject("getCity", id);
 	}
 	
 }

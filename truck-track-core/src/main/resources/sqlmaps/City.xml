@@ -19,6 +19,12 @@
 	]]>
 	</select>
 	
+	<select id="getCity" resultMap="cityResultMap">
+		SELECT c.id, c.name, c.postcode, c.allowed, c.ref_country_code
+		FROM tt_city c
+ 		WHERE c.id = #id#
+	</select>
+	
 	<select id="getCitiesByCountry" resultMap="cityResultMap">
 		SELECT c.id, c.name, c.postcode, c.allowed, c.ref_country_code
 		FROM tt_city c
@@ -35,7 +41,7 @@
 		SET name = #name#,
 			postcode = #postcode#,
 			allowed = #allowed#,
-			refCountryCode = #refCountryCode#
+			ref_country_code = #refCountryCode#
 		WHERE id = #id#
 	</update>
 	
